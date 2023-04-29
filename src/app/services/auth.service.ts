@@ -6,10 +6,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http : HttpClient) { }
+
+  public isAuthenticated() : boolean {
+    let userData = localStorage.getItem('userInfo')
+    if(userData && JSON.parse(userData)){
+      return true;
+    }
+    return false;
   }
-    
-  login(email:string, password:string ) {
-      return this.http.post<any>('/api/login', {email, password});
+
+  public setUserInfo(user:string){
+    localStorage.setItem('userInfo', JSON.stringify(user));
+  }
+
+  public validate(email:string, password:string) {
+    return this.http.post('/api/authenticate', {'username' : email, 'password' : password}).toPromise()
   }
 }
