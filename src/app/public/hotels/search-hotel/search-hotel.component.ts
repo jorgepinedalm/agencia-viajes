@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class SearchHotelComponent {
   form:FormGroup;
   todayDate:Date;
+  cities:any[]
 
   constructor(
     private fb:FormBuilder,
@@ -21,5 +22,6 @@ export class SearchHotelComponent {
           numberPeople: [1,Validators.required],
           city: ['',Validators.required]
       });
+      this.cities = [];
   }
 }

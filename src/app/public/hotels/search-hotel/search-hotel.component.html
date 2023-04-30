@@ -9,15 +9,21 @@
             </span>
         </div>
         <div class="form-field mb-3">
-            <span class="p-float-label">
-
+            <span class="flex justify-content-between align-items-center">
+                <label htmlFor="numberPeople" for="numberPeople" class="mr-3">Cantidad de personas</label>
                 <p-inputNumber inputId="numberPeople" formControlName="numberPeople" [showButtons]="true" buttonLayout="horizontal"
                     spinnerMode="horizontal" inputId="vertical" decrementButtonClass="p-button-secondary"
-                    incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"></p-inputNumber>
-                <label htmlFor="numberPeople" for="numberPeople">Cantidad de personas</label>
+                    incrementButtonClass="p-button-secondary" incrementButtonIcon="bi bi-plus"
+                    decrementButtonIcon="bi bi-dash" [min]="1" [max]="10" inputStyleClass="numberPeople__input"></p-inputNumber>
+                
             </span>
         </div>
-
+        <div class="form-field mb-3">
+            <span class="p-float-label">
+                <p-dropdown [options]="cities" formControlName="city" optionLabel="city" styleClass="w-full"></p-dropdown>
+                <label htmlFor="city" for="city">Ciudad destino</label>
+            </span>
+        </div>
+        <button type="button" pButton pRipple class="p-button-success w-full button-submit">Buscar</button>
     </form>
 </p-card>
