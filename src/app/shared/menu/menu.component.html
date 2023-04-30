@@ -3,6 +3,7 @@
         <h1 class="webTitle">Agencia de viajes</h1>
     </ng-template>
     <ng-template pTemplate="end">
-        <a [routerLink]="['/login']" routerLinkActive="router-link-active" >Iniciar sesión</a>
+        <a [routerLink]="['/login']" *ngIf="!isUserLoggedIn">Iniciar sesión</a>
+        <button type="button" class="button-logout" (click)="logout()" *ngIf="isUserLoggedIn">Cerrar sesión</button>
     </ng-template>
 </p-menubar>
