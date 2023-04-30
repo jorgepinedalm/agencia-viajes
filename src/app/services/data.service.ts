@@ -64,14 +64,135 @@ export class DataService {
         city: {code: "BOG", name: "BOGOTA"},
         name: "Hotel Conform Capital",
         rating: 3,
-        disabled: false
+        disabled: false,
+        rooms: [
+          {
+            code: "H1101",
+            descripcion: "Habitación sencilla",
+            booked:false,
+            cost: 125000,
+            disabled: false,
+            tax: 23750,
+            roomType: RoomType.SENCILLA,
+            location: {
+              floor: 1,
+              number: 1
+            }
+          },
+          {
+            code: "H1102",
+            descripcion: "Habitación sencilla",
+            booked:false,
+            cost: 100000,
+            disabled: false,
+            tax: 19000,
+            roomType: RoomType.SENCILLA,
+            location: {
+              floor: 1,
+              number: 2
+            }
+          },
+          {
+            code: "H1102",
+            descripcion: "Habitación king",
+            booked:false,
+            cost: 200000,
+            disabled: false,
+            tax: 38000,
+            roomType: RoomType.KING,
+            location: {
+              floor: 2,
+              number: 1
+            }
+          },
+          {
+            code: "H1103",
+            descripcion: "Habitación doble",
+            booked:false,
+            cost: 150000,
+            disabled: false,
+            tax: 28500,
+            roomType: RoomType.DOBLE,
+            location: {
+              floor: 1,
+              number: 3
+            }
+          }
+        ]
       },
       {
         code: "H3",
         city: {code: "BOG", name: "BOGOTA"},
         name: "Hilton Garden Inn Bogota Airport",
         rating: 5,
-        disabled: false
+        disabled: false,
+        rooms: [
+          {
+            code: "H1101",
+            descripcion: "Habitación sencilla",
+            booked:false,
+            cost: 125000,
+            disabled: false,
+            tax: 23750,
+            roomType: RoomType.SENCILLA,
+            location: {
+              floor: 1,
+              number: 1
+            }
+          },
+          {
+            code: "H1102",
+            descripcion: "Habitación sencilla",
+            booked:false,
+            cost: 99900,
+            disabled: false,
+            tax: 23750,
+            roomType: RoomType.SENCILLA,
+            location: {
+              floor: 1,
+              number: 2
+            }
+          },
+          {
+            code: "H1103",
+            descripcion: "Habitación sencilla",
+            booked:false,
+            cost: 100000,
+            disabled: false,
+            tax: 19000,
+            roomType: RoomType.SENCILLA,
+            location: {
+              floor: 1,
+              number: 3
+            }
+          },
+          {
+            code: "H2101",
+            descripcion: "Habitación king",
+            booked:false,
+            cost: 200000,
+            disabled: false,
+            tax: 38000,
+            roomType: RoomType.KING,
+            location: {
+              floor: 2,
+              number: 1
+            }
+          },
+          {
+            code: "H1103",
+            descripcion: "Habitación doble",
+            booked:false,
+            cost: 150000,
+            disabled: false,
+            tax: 28500,
+            roomType: RoomType.DOBLE,
+            location: {
+              floor: 1,
+              number: 3
+            }
+          }
+        ]
       },
       {
         code: "H4",
