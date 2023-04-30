@@ -9,5 +9,6 @@ export interface Hotel {
     rooms?:Room[];
     averageCost?:number;
     minCost?:number;
+    busy?:boolean;
     disabled:boolean;
 }

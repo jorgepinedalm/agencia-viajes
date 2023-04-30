@@ -22,7 +22,8 @@ export class HotelService {
   getHotels():Observable<Hotel[]>{
     this.hotels.map(
       hotel => {
-        if(hotel.rooms) hotel.minCost = Math.min.apply(Math, hotel.rooms.map(function(val) { return val.cost; }))
+        if(hotel.rooms) hotel.minCost = Math.min.apply(Math, hotel.rooms.map(function(val) { return val.cost; }));
+        hotel.busy = hotel.rooms?.every(room => room.booked);
         return hotel;
       }
     )
