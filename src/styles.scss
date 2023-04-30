@@ -1,5 +1,45 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+
 body {
     font-family: var(--font-family);
+}
+
+.p-container {
+    margin: auto !important;
+}
+
+@media (min-width: 1200px) {
+    .p-container {
+        max-width: 1140px;
+        width: 1140px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .p-container {
+        max-width: 960px;
+        width: 960px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .p-container {
+        max-width: 720px;
+        width: 720px;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    .p-container {
+        max-width: 540px;
+        width: 540px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .p-container {
+        max-width: 95%;
+        width: 95%;
+    }
 }

@@ -1,1 +1,23 @@
-<p>search-hotel works!</p>
+<p-card header="Buscar hoteles" styleClass="w-full">
+    <form [formGroup]="form">
+        <div class="form-field mb-3">
+            <span class="p-float-label">
+                <p-calendar id="dates" formControlName="dates" styleClass="w-full" selectionMode="range"
+                    [readonlyInput]="true" [numberOfMonths]="2" [minDate]="todayDate"
+                    dateFormat="dd/mm/yy"></p-calendar>
+                <label htmlFor="dates" for="dates">Entrada / Salida de alojamiento</label>
+            </span>
+        </div>
+        <div class="form-field mb-3">
+            <span class="p-float-label">
+
+                <p-inputNumber inputId="numberPeople" formControlName="numberPeople" [showButtons]="true" buttonLayout="horizontal"
+                    spinnerMode="horizontal" inputId="vertical" decrementButtonClass="p-button-secondary"
+                    incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"></p-inputNumber>
+                <label htmlFor="numberPeople" for="numberPeople">Cantidad de personas</label>
+            </span>
+        </div>
+
+    </form>
+</p-card>
