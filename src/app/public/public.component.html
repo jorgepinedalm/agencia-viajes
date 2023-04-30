@@ -1,10 +1,2 @@
-<p-menubar [model]="items" styleClass="bg-bluegray-50">
-    <ng-template pTemplate="start">
-        <h1 class="webTitle">Agencia de viajes</h1>
-    </ng-template>
-    <ng-template pTemplate="end">
-        <a [routerLink]="['/login']" routerLinkActive="router-link-active" >Iniciar sesión</a>
-    </ng-template>
-</p-menubar>
-
+<app-menu></app-menu>
 <router-outlet></router-outlet>
