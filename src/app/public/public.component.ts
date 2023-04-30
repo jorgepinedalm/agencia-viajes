@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-public',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class PublicComponent {
 
+  items:MenuItem[];
+
+  constructor(){
+    this.items = [
+      {
+        label: "Hoteles",
+        routerLink: "hotels"
+      }
+    ];
+  }
 }

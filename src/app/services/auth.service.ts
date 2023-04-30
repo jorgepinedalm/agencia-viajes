@@ -22,6 +22,7 @@ export class AuthService {
   }
 
   public validate(email:string, password:string) {
-    return this.http.post(`${environment.API}/authenticate`, {'username' : email, 'password' : password}).toPromise()
+    return Promise.resolve({user: {email: email, idUser: 1}});
+    //return this.http.post(`${environment.API}/authenticate`, {'username' : email, 'password' : password}).toPromise()
   }
 }
