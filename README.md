@@ -1,5 +1,14 @@
 # AgenciaViajes
 
+App for front-end technical test by Jorge Pineda Montagut. Mock data in service. 
+
+Use primeng.
+
+
+Implemented CI/CD strategy in Azure. 
+
+Use of design pattern implemented in Angular framework.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.8.
 
 ## Development server
