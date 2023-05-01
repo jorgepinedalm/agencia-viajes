@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-12 sm:col-5 md:col-4">
                             <span class="p-float-label">
-                                <p-dropdown [options]="[]" formControlName="typeID" optionLabel="name" placeholder="Seleccione un tipo de documento"  optionValue="id" styleClass="w-full"></p-dropdown>
+                                <p-dropdown [options]="typesID" formControlName="typeID" optionLabel="value" placeholder="Seleccione un tipo de documento" optionValue="id" styleClass="w-full"></p-dropdown>
                                 <label htmlFor="typeID" for="typeID">Tipo de documento </label>
                             </span>
                         </div>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="col-12 sm:col-6 md:col-4">
                             <span class="p-float-label">
-                                <p-dropdown [options]="[]" formControlName="gender" optionLabel="name" placeholder="Seleccione un género"  optionValue="id" styleClass="w-full"></p-dropdown>
+                                <p-dropdown [options]="genders" formControlName="gender" optionLabel="value" placeholder="Seleccione un género" optionValue="id" styleClass="w-full"></p-dropdown>
                                 <label htmlFor="gender" for="gender">Género</label>
                             </span>
                         </div>

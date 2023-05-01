@@ -3,6 +3,7 @@ import { RoomType, RoomType as RoomTypeEnum } from '../enums/room-type';
 import { Hotel } from '../models/hotel';
 import { Observable, of } from 'rxjs';
 import { City } from '../models/city';
+import { ListValue } from '../list-value';
 
 @Injectable({
   providedIn: 'root'
@@ -268,6 +269,45 @@ export class DataService {
       }
     ]
     return of(cities);
+  }
+
+  getTypesID():Observable<ListValue[]>{
+    const types:ListValue[] = [
+      {
+        id: 1,
+        code: "CC",
+        value: "Cedula de ciudadania"
+      },
+      {
+        id: 2,
+        code: "TI",
+        value: "Tarjeta de identidad"
+      },
+      {
+        id: 3,
+        code: "PAS",
+        value: "Pasaporte"
+      }
+    ]
+    return of(types);
+  }
+
+  getGenders():Observable<ListValue[]>{
+    const genders:ListValue[] = [
+      {
+        id: 1,
+        value: "Hombre"
+      },
+      {
+        id: 2,
+        value: "Mujer"
+      },
+      {
+        id: 3,
+        value: "Otro"
+      }
+    ]
+    return of(genders);
   }
 
 }

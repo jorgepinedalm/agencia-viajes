@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { forkJoin } from 'rxjs';
+import { ListValue } from 'src/app/list-value';
 import { Room } from 'src/app/models/room';
 import { BookingService } from 'src/app/services/booking.service';
+import { DataService } from 'src/app/services/data.service';
 import { HotelService } from 'src/app/services/hotel.service';
 
 @Component({
@@ -10,12 +13,15 @@ import { HotelService } from 'src/app/services/hotel.service';
   templateUrl: './checkin-guests.component.html',
   styleUrls: ['./checkin-guests.component.scss']
 })
-export class CheckinGuestsComponent {
+export class CheckinGuestsComponent implements OnInit {
   room?:Room;
   guestsForm : FormGroup;
   today:Date;
   idHotel:number;
+  typesID:ListValue[];
+  genders:ListValue[];
   constructor(
+    private dataService:DataService,
     private hotelService:HotelService,
     private bookingService:BookingService,
     private fb :FormBuilder,
@@ -33,6 +39,11 @@ export class CheckinGuestsComponent {
       guests: this.fb.array([this.buildFormDynamic()])    
     })  
     this.today = new Date();
+    this.typesID = [];
+    this.genders = [];
+  }
+  ngOnInit(): void {
+    this.getListDataForm();
   }
 
   getSelectedRoom(idHotel:number, codeRoom:string):void{
@@ -49,6 +60,18 @@ export class CheckinGuestsComponent {
 
   removeGuest(indexForm:number):void{
     this.guests.removeAt(indexForm);
+  }
+
+  getListDataForm():void{
+    forkJoin({
+      typesID: this.dataService.getTypesID(),
+      genders: this.dataService.getGenders()
+    }).subscribe(
+      lists => {
+        this.typesID = lists.typesID;
+        this.genders = lists.genders;
+      }
+    )
   }
   
   buildFormDynamic():FormGroup{    
