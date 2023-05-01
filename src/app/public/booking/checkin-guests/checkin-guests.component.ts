@@ -73,6 +73,10 @@ export class CheckinGuestsComponent implements OnInit {
       }
     )
   }
+
+  enableFinishButton():boolean{
+    return this.guests.controls.every(control => control.valid);
+  }
   
   buildFormDynamic():FormGroup{    
     return this.fb.group({    

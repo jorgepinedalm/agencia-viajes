@@ -126,7 +126,7 @@
         </div>
         <div class="text-center mb-3">
             <button type="button" pButton pRipple class="p-button-raised p-button-text p-button-secondary font-semibold uppercase justify-content-center" [routerLink]="['/hotels']">Cancelar</button>
-            <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center ml-2">Realizar reserva</button>
+            <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center ml-2" [disabled]="!enableFinishButton()">Realizar reserva</button>
         </div>
     </form>    
 </div>
