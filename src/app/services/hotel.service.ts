@@ -47,6 +47,10 @@ export class HotelService {
     return hotel && hotel.rooms ? hotel.rooms : [];
   }
 
+  getRoomById(idHotel:number, codeRoom:string):Observable<Room | undefined>{
+    return of(this.hotels.find(hotel => hotel.id == idHotel)?.rooms?.find(room => room.code == codeRoom));
+  }
+
   create(hotel:Hotel):Observable<boolean>{
     this.hotels.push(hotel);
     return of(true);

@@ -1,0 +1,127 @@
+<div class="room-wrapper" *ngIf="room">
+    <p-card subheader="Habitación seleccionada" styleClass="w-full mb-3">
+        <div class="flex flex-column md:flex-row xl:align-items-start gap-4">
+            <img class="w-9 sm:w-5rem xl:w-5rem shadow-2 block xl:block mx-auto border-round" src="https://dummyimage.com/92x92/eeeeee/333333.png" [alt]="room.descripcion" />
+            <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                    <div class="text-xl font-bold text-900">{{ room.descripcion }}</div>
+                    <div class="flex align-items-center gap-3">
+                        <p-tag [value]="room.roomType"></p-tag>
+                    </div>
+                </div>
+                <div class="flex align-items-center gap-3 sm:gap-2">
+                    <div class="mr-3 line-height-1 text-center" *ngIf="room.capacity">
+                        <small class="text-xs">Capacidad</small>
+                        <span class="text-2xl font-semibold block">
+                            {{room.capacity}} 
+                        </span>
+                        <small class="text-xs">persona<span *ngIf="room.capacity > 1">s</span></small>
+                    </div>
+                    <div class="mr-3 line-height-1" *ngIf="room.cost">
+                        <small class="text-xs">Valor</small>
+                        <span class="text-2xl font-semibold block">
+                            {{ room.cost | currency : "COP" : 'symbol-narrow':"1.0-0" }}
+                        </span>
+                        <small class="text-xs">+ IVA {{ room.tax | currency : "COP" : 'symbol-narrow':"1.0-0" }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-card>
+    <form [formGroup]="guestsForm">
+    
+        <p-accordion [activeIndex]="0" styleClass="mb-3">
+            <p-accordionTab formArrayName="guests" *ngFor="let guestForm of guests.controls; let index = index">
+                <ng-template pTemplate="header">
+                    <div class="flex align-items-center justify-content-between w-full">
+                        <div>
+                            <span class="bi bi-person mr-2"></span>
+                            <span class="vertical-align-middle">Información del huesped {{index + 1}}</span>
+                        </div>
+                        <div *ngIf="index > 0">
+                            <p-button icon="bi bi-trash" (click)="removeGuest(index)" styleClass="p-button-sm p-button-rounded p-button-raised p-button-danger" title="Eliminar huesped"></p-button>
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="form-wrapper" [formGroupName]="index">
+                    <div class="grid">
+                        <div class="col-12 sm:col-6">
+                            <span class="p-float-label">
+                                <input pInputText type="text" id="firstName" formControlName="firstName" class="w-full"/>
+                                <label htmlFor="firstName" for="firstName">Nombres</label>
+                            </span>
+                        </div>
+                        <div class="col-12 sm:col-6">
+                            <span class="p-float-label">
+                                <input pInputText type="text" id="lastName" formControlName="lastName" class="w-full"/>
+                                <label htmlFor="lastName" for="lastName">Apellidos</label>
+                            </span>
+                        </div>
+                        <div class="col-12 sm:col-5 md:col-4">
+                            <span class="p-float-label">
+                                <p-dropdown [options]="[]" formControlName="typeID" optionLabel="name" placeholder="Seleccione un tipo de documento"  optionValue="id" styleClass="w-full"></p-dropdown>
+                                <label htmlFor="typeID" for="typeID">Tipo de documento </label>
+                            </span>
+                        </div>
+                        <div class="col-12 sm:col-7 md:col-4">
+                            <span class="p-float-label">
+                                <input pInputText type="number" id="numberID" formControlName="numberID" class="w-full"/>
+                                <label htmlFor="numberID" for="numberID">Tipo de documento </label>
+                            </span>
+                        </div>
+                        <div class="col-12 sm:col-6 md:col-4">
+                            <span class="p-float-label">
+                                <p-dropdown [options]="[]" formControlName="gender" optionLabel="name" placeholder="Seleccione un género"  optionValue="id" styleClass="w-full"></p-dropdown>
+                                <label htmlFor="gender" for="gender">Género</label>
+                            </span>
+                        </div>
+                        <div class="col-12 sm:col-6 md:col-3">
+                            <span class="p-float-label">
+                                <p-calendar id="birthdate" formControlName="birthdate" styleClass="w-full"
+                                    [readonlyInput]="true" [maxDate]="today"
+                                    dateFormat="dd/mm/yy"></p-calendar>
+                                <label htmlFor="birthdate" for="birthdate">Fecha de nacimiento</label>
+                            </span>
+                        </div>
+                        <div class="col-12 sm:col-6 md:col-3">
+                            <span class="p-float-label">
+                                <input pInputText type="text" id="phone" formControlName="phone" class="w-full"/>
+                                <label htmlFor="phone" for="phone">Teléfono</label>
+                            </span>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <span class="p-float-label">
+                                <input pInputText type="email" id="email" formControlName="email" placeholder="ej: usuario@correo.com" class="w-full"/>
+                                <label htmlFor="email" for="email">Correo electrónico </label>
+                            </span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p class="text-secondary">Contacto de emergencia</p>
+                    <div class="grid">
+                        <div class="col-12 md:col-9">
+                            <span class="p-float-label">
+                                <input pInputText type="text" id="nameContactEmergency" formControlName="nameContactEmergency" class="w-full"/>
+                                <label htmlFor="nameContactEmergency" for="nameContactEmergency">Nombres completos</label>
+                            </span>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <span class="p-float-label">
+                                <input pInputText type="text" id="phoneContactEmergency" formControlName="phoneContactEmergency" class="w-full"/>
+                                <label htmlFor="phoneContactEmergency" for="phoneContactEmergency">Teléfono</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+        <div class="text-right mb-3">
+            <button type="button" pButton pRipple class="p-button-raised p-button-text p-button-secondary font-semibold uppercase justify-content-center" [routerLink]="['/booking/'+idHotel+'/book-hotel']" routerLinkActive="router-link-active" >Seleccionar otra habitación</button>
+            <button type="button" pButton pRipple class="p-button-raised p-button-info font-semibold uppercase justify-content-center ml-2" *ngIf="room.capacity > 1" (click)="addGuest()" [disabled]="guests.length >= room.capacity">Añadir huesped</button>
+        </div>
+        <div class="text-center mb-3">
+            <button type="button" pButton pRipple class="p-button-raised p-button-text p-button-secondary font-semibold uppercase justify-content-center" [routerLink]="['/hotels']">Cancelar</button>
+            <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center ml-2">Realizar reserva</button>
+        </div>
+    </form>    
+</div>

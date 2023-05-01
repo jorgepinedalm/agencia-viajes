@@ -114,7 +114,7 @@ export class DataService {
             }
           },
           {
-            code: "H1102",
+            code: "H2101",
             descripcion: "Habitación king",
             booked:false,
             capacity: 3,
