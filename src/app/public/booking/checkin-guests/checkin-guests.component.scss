@@ -7,4 +7,7 @@
         height: 32px;
         padding: 0.75rem 0; 
     }
+    .p-component.ng-invalid.ng-touched, p-dropdown.ng-invalid.ng-touched .p-dropdown {
+        border-color: red;
+    }
 }

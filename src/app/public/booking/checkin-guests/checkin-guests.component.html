@@ -1,5 +1,11 @@
 <div class="room-wrapper" *ngIf="room">
-    <p-card subheader="Habitación seleccionada" styleClass="w-full mb-3">
+    <p-card styleClass="w-full mb-3">
+        <ng-template pTemplate="header">
+            <div class="flex justify-content-between align-items-center px-3 py-2 border-bottom-1 border-200">
+                <h3 class="text-sm mb-2 sm:m-0 uppercase">Habitación seleccionada</h3>
+                <p-button label="Cambiar habitación" styleClass="p-button-sm p-button-outlined p-button-help" [routerLink]="['/booking/'+idHotel+'/book-hotel']"></p-button>
+            </div>
+        </ng-template>    
         <div class="flex flex-column md:flex-row xl:align-items-start gap-4">
             <img class="w-9 sm:w-5rem xl:w-5rem shadow-2 block xl:block mx-auto border-round" src="https://dummyimage.com/92x92/eeeeee/333333.png" [alt]="room.descripcion" />
             <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -116,8 +122,7 @@
             </p-accordionTab>
         </p-accordion>
         <div class="text-right mb-3">
-            <button type="button" pButton pRipple class="p-button-raised p-button-text p-button-secondary font-semibold uppercase justify-content-center" [routerLink]="['/booking/'+idHotel+'/book-hotel']" routerLinkActive="router-link-active" >Seleccionar otra habitación</button>
-            <button type="button" pButton pRipple class="p-button-raised p-button-info font-semibold uppercase justify-content-center ml-2" *ngIf="room.capacity > 1" (click)="addGuest()" [disabled]="guests.length >= room.capacity">Añadir huesped</button>
+            <button type="button" pButton pRipple class="p-button-raised p-button-info font-semibold uppercase justify-content-center ml-2" *ngIf="room.capacity > 1" (click)="addGuest()" label="Añadir huesped" icon="bi bi-plus" [disabled]="guests.length >= room.capacity"></button>
         </div>
         <div class="text-center mb-3">
             <button type="button" pButton pRipple class="p-button-raised p-button-text p-button-secondary font-semibold uppercase justify-content-center" [routerLink]="['/hotels']">Cancelar</button>
