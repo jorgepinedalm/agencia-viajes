@@ -21,7 +21,7 @@
                             <small class="text-xs">sin impuestos</small>
                         </div>
                         
-                        <button *ngIf="!hotel.busy" pButton class="md:align-self-end mb-2 p-button-sm p-button-rounded p-button-raised p-button-success font-semibold uppercase">Seleccionar</button>
+                        <button *ngIf="!hotel.busy" (click)="goToBookHotel(hotel)" pButton class="md:align-self-end mb-2 p-button-sm p-button-rounded p-button-raised p-button-success font-semibold uppercase">Seleccionar</button>
                         <button *ngIf="hotel.busy" pButton class="md:align-self-end mb-2 p-button-sm p-button-rounded p-button-raised p-button-success font-semibold uppercase" disabled>Ocupado</button>
                     </div>
                 </div>

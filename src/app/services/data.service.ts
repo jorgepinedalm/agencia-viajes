@@ -14,7 +14,7 @@ export class DataService {
   mockData():Hotel[]{
     return [
       {
-        code: "H1",
+        id: 1,
         city: {code: "SMR", name: "SANTA MARTA"},
         name: "Hotel Colombia Real",
         rating: 4.8,
@@ -79,7 +79,7 @@ export class DataService {
         ]
       },
       {
-        code: "H2",
+        id: 2,
         city: {code: "BOG", name: "BOGOTA"},
         name: "Hotel Conform Capital",
         rating: 3,
@@ -144,7 +144,7 @@ export class DataService {
         ]
       },
       {
-        code: "H3",
+        id: 3,
         city: {code: "BOG", name: "BOGOTA"},
         name: "Hilton Garden Inn Bogota Airport",
         rating: 5,
@@ -223,7 +223,7 @@ export class DataService {
         ]
       },
       {
-        code: "H4",
+        id: 4,
         city: {code: "CTG", name: "CARTAGENA"},
         name: "Estelar Cartagena de Indias Hotel y Centro de Convenciones",
         rating: 4.5,

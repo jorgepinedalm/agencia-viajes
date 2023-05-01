@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Hotel } from '../models/hotel';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RoomType } from '../enums/room-type';
 import { DataService } from './data.service';
 import { Room } from '../models/room';
+import { FilterDataHotel } from '../models/filter-data-hotel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +13,38 @@ import { Room } from '../models/room';
 export class HotelService {
 
   private hotels:Hotel[];
+  private $hotels:BehaviorSubject<Hotel[]>;
 
   constructor(
     private dataService:DataService
   ) {
-    this.hotels = this.dataService.mockData();
+    
+    this.$hotels = new BehaviorSubject<Hotel[]>(this.mockData());
+    this.hotels = this.mockData();
    }
 
-  getHotels():Observable<Hotel[]>{
-    this.hotels.map(
+   private mockData():Hotel[]{
+    const hotels = this.dataService.mockData();
+    return hotels.map(
       hotel => {
         if(hotel.rooms) hotel.minCost = Math.min.apply(Math, hotel.rooms.map(function(val) { return val.cost; }));
         hotel.busy = hotel.rooms?.every(room => room.booked);
         return hotel;
       }
     )
-    return of(this.hotels);
+   }
+
+  getHotels():Observable<Hotel[]>{
+    return this.$hotels.asObservable();
+  }
+
+  getHotelById(id:number):Hotel | undefined{
+    return this.hotels.find(hotel => hotel.id == id);
+  }
+
+  getRoomsFromHotel(idHotel:number):Room[]{
+    const hotel = this.hotels.find(hotel => hotel.id == idHotel);
+    return hotel && hotel.rooms ? hotel.rooms : [];
   }
 
   create(hotel:Hotel):Observable<boolean>{
@@ -36,7 +53,7 @@ export class HotelService {
   }
 
   disable(hotel:Hotel):Observable<boolean>{
-    const foundHotel = this.hotels.find(hotelItem => hotelItem.code == hotel.code);
+    const foundHotel = this.hotels.find(hotelItem => hotelItem.id == hotel.id);
     if(foundHotel){
       foundHotel.disabled = false;
     }
@@ -44,7 +61,7 @@ export class HotelService {
   }
 
   enable(hotel:Hotel):Observable<boolean>{
-    const foundHotel = this.hotels.find(hotelItem => hotelItem.code == hotel.code);
+    const foundHotel = this.hotels.find(hotelItem => hotelItem.id == hotel.id);
     if(foundHotel){
       foundHotel.disabled = false;
     }
@@ -52,14 +69,21 @@ export class HotelService {
   }
 
   update(hotel:Hotel):Observable<boolean>{
-    const foundHotel = this.hotels.findIndex(hotelItem => hotelItem.code == hotel.code);
+    const foundHotel = this.hotels.findIndex(hotelItem => hotelItem.id == hotel.id);
     this.hotels[foundHotel] = hotel;
     return of(true);
   }
 
   delete(hotel:Hotel):Observable<boolean>{
-    const foundHotel = this.hotels.findIndex(hotelItem => hotelItem.code == hotel.code);
+    const foundHotel = this.hotels.findIndex(hotelItem => hotelItem.id == hotel.id);
     this.hotels.splice(foundHotel, 1);
     return of(true);
+  }
+
+  search(filter:FilterDataHotel):void{
+    let hotels = this.hotels;
+    hotels = hotels.filter(
+      hotel => hotel.city.code == filter.city && hotel.rooms?.some(room => room.capacity <= filter.numberPeople))
+    this.$hotels.next(hotels);
   }
 }

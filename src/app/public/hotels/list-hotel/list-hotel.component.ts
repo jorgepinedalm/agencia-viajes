@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
 import { Hotel } from 'src/app/models/hotel';
 import { HotelService } from 'src/app/services/hotel.service';
@@ -14,7 +15,8 @@ export class ListHotelComponent {
   sortOptions: SelectItem[];
 
   constructor(
-    private hotelService:HotelService
+    private hotelService:HotelService,
+    private router:Router
   ){
     this.hotels = [];
     this.sortOptions = [
@@ -27,9 +29,14 @@ export class ListHotelComponent {
   getHotels():void{
     this.hotelService.getHotels().subscribe(
       (hotel:Hotel[]) => {
+        console.log("hotels: ", hotel);
         this.hotels = hotel;
       }
     )
+  }
+
+  goToBookHotel(hotel:Hotel):void{
+    this.router.navigateByUrl(`/booking/${hotel.id}/book-hotel`);
   }
 
 }

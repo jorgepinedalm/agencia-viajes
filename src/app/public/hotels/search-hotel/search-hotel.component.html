@@ -20,10 +20,10 @@
         </div>
         <div class="form-field mb-3">
             <span class="p-float-label">
-                <p-dropdown [options]="cities" formControlName="city" optionLabel="name" styleClass="w-full"></p-dropdown>
+                <p-dropdown [options]="cities" formControlName="city" optionLabel="name" optionValue="code" styleClass="w-full"></p-dropdown>
                 <label htmlFor="city" for="city">Ciudad destino</label>
             </span>
         </div>
-        <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center w-full button-submit">Buscar</button>
+        <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center w-full button-submit" (click)="search()" [disabled]="!form.valid">Buscar</button>
     </form>
 </p-card>

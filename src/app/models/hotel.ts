@@ -2,7 +2,7 @@ import { City } from "./city";
 import { Room } from "./room";
 
 export interface Hotel {
-    code:string;
+    id:number;
     name:string;
     city:City;
     rating:number;
