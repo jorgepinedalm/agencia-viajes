@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { City } from 'src/app/models/city';
 import { FilterDataHotel } from 'src/app/models/filter-data-hotel';
@@ -26,7 +26,7 @@ export class SearchHotelComponent implements OnInit {
       this.form = this.fb.group({
           dates: ['',Validators.required],
           numberPeople: [1,Validators.required],
-          city: [undefined,Validators.required]
+          city: new FormControl(null, [Validators.required])
       });
       this.cities = [];
   }

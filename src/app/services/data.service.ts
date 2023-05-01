@@ -167,7 +167,7 @@ export class DataService {
           {
             code: "H1102",
             descripcion: "Habitación sencilla",
-            booked:false,
+            booked:true,
             capacity: 1,
             cost: 99900,
             disabled: false,
