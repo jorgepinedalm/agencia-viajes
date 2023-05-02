@@ -26,7 +26,7 @@ export class LoginComponent {
     this.authService.validate(val.user, val.password)
     .then((response:any) => {
       this.authService.setUserInfo({'user' : response['user']});
-      this.router.navigate(['auth/home']);
+      this.router.navigateByUrl('/auth/home');
 
     })
   }

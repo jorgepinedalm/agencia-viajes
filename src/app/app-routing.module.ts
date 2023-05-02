@@ -8,8 +8,8 @@ const routes: Routes = [
     path: '',
     component: AppComponent,
     children: [
-      { path: '', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) },
-      { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule), canActivate : [AuthGuard] }
+      { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule), canActivate : [AuthGuard] },
+      { path: '', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) }
     ]
   }
   
