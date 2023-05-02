@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { ListValue } from 'src/app/list-value';
 import { Room } from 'src/app/models/room';
@@ -20,12 +20,14 @@ export class CheckinGuestsComponent implements OnInit {
   idHotel:number;
   typesID:ListValue[];
   genders:ListValue[];
+  dates:Date[];
   constructor(
     private dataService:DataService,
     private hotelService:HotelService,
     private bookingService:BookingService,
     private fb :FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router:Router
   ){
     
     const paramIdHotel = this.route.snapshot.paramMap.get("id") as string;
@@ -33,9 +35,11 @@ export class CheckinGuestsComponent implements OnInit {
     const codeRoom = this.route.snapshot.paramMap.get("idRoom") as string;
     this.getSelectedRoom(this.idHotel, codeRoom);
 
+    const selectedDate = this.dataService.getFilters();
+    this.dates = selectedDate ? [selectedDate.entryDate as Date, selectedDate.departureDate as Date] : [];
     this.guestsForm = this.fb.group({    
       idHotel : [this.idHotel],
-      codeRoom: [codeRoom],    
+      codeRoom: [codeRoom],
       guests: this.fb.array([this.buildFormDynamic()])    
     })  
     this.today = new Date();
@@ -76,6 +80,16 @@ export class CheckinGuestsComponent implements OnInit {
 
   enableFinishButton():boolean{
     return this.guests.controls.every(control => control.valid);
+  }
+
+  bookingRoom():void{
+    const booking = {...this.guestsForm.value, entryDate: this.dates[0], departureDate: this.dates[1]};
+    this.bookingService.save(booking).subscribe(
+      () => {
+        this.router.navigateByUrl("/hotels");
+        alert("Reserva guardada exitosamente");
+      }
+    )
   }
   
   buildFormDynamic():FormGroup{    

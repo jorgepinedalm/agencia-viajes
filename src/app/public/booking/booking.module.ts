@@ -14,6 +14,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CalendarModule } from 'primeng/calendar';
     AccordionModule,
     InputTextModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    ConfirmDialogModule
   ]
 })
 export class BookingModule { }

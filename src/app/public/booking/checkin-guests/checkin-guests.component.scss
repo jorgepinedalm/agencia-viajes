@@ -10,4 +10,11 @@
     .p-component.ng-invalid.ng-touched, p-dropdown.ng-invalid.ng-touched .p-dropdown {
         border-color: red;
     }
+    .dates-calendar.p-calendar .p-inputtext{
+        padding: .5rem
+    }
+}
+.field-dates label {
+    font-size: 0.75rem;
+    line-height: 1.4;
 }

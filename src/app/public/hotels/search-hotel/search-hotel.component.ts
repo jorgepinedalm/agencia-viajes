@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { City } from 'src/app/models/city';
 import { FilterDataHotel } from 'src/app/models/filter-data-hotel';
 import { DataService } from 'src/app/services/data.service';
@@ -14,11 +13,10 @@ import { HotelService } from 'src/app/services/hotel.service';
 export class SearchHotelComponent implements OnInit {
   form:FormGroup;
   todayDate:Date;
-  cities:any[]
+  cities:any[];
 
   constructor(
     private fb:FormBuilder,
-    private router: Router,
     private dataService:DataService,
     private hotelService:HotelService
   ) {
@@ -30,7 +28,13 @@ export class SearchHotelComponent implements OnInit {
       });
       this.cities = [];
   }
+
   ngOnInit(): void {
+    const filters = this.dataService.getFilters();
+    if(filters){
+      this.form.patchValue({...filters, dates: [filters.entryDate, filters.departureDate]});
+      this.hotelService.search(filters);
+    }
     this.getCities();
   }
 
@@ -50,6 +54,13 @@ export class SearchHotelComponent implements OnInit {
       city: formValue.city,
       numberPeople: formValue.numberPeople
     }
+    this.dataService.saveFilters(filters);
     this.hotelService.search(filters);
+  }
+
+  clearFilter():void{
+    this.dataService.clearFilters();
+    this.form.reset();
+    this.hotelService.search();
   }
 }

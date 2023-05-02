@@ -4,11 +4,14 @@ import { Hotel } from '../models/hotel';
 import { Observable, of } from 'rxjs';
 import { City } from '../models/city';
 import { ListValue } from '../list-value';
+import { FilterDataHotel } from '../models/filter-data-hotel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
+  filters?:FilterDataHotel;
 
   constructor() { }
 
@@ -308,6 +311,18 @@ export class DataService {
       }
     ]
     return of(genders);
+  }
+
+  saveFilters(filters:FilterDataHotel):void{
+    this.filters = filters;
+  }
+
+  getFilters():FilterDataHotel | undefined{
+    return this.filters;
+  }
+
+  clearFilters():void{
+    this.filters = undefined;
   }
 
 }

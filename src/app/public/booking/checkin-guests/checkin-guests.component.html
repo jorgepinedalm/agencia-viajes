@@ -3,7 +3,15 @@
         <ng-template pTemplate="header">
             <div class="flex justify-content-between align-items-center px-3 py-2 border-bottom-1 border-200">
                 <h3 class="text-sm mb-2 sm:m-0 uppercase">Habitación seleccionada</h3>
-                <p-button label="Cambiar habitación" styleClass="p-button-sm p-button-outlined p-button-help" [routerLink]="['/booking/'+idHotel+'/book-hotel']"></p-button>
+                <div class="flex">
+                    <span class="field-dates p-float-label mr-2">
+                        <p-calendar id="dates" [(ngModel)]="dates" styleClass="dates-calendar w-full p-inputtext-sm mr-2" selectionMode="range"
+                            [readonlyInput]="true" [numberOfMonths]="2" [maxDate]="today"
+                            dateFormat="dd/mm/yy"></p-calendar>
+                        <label htmlFor="dates" for="dates">Entrada / Salida de alojamiento</label>
+                    </span>
+                    <p-button label="Cambiar habitación" styleClass="p-button-sm p-button-outlined p-button-help" [routerLink]="['/booking/'+idHotel+'/book-hotel']"></p-button>
+                </div>
             </div>
         </ng-template>    
         <div class="flex flex-column md:flex-row xl:align-items-start gap-4">
@@ -84,8 +92,7 @@
                         <div class="col-12 sm:col-6 md:col-3">
                             <span class="p-float-label">
                                 <p-calendar id="birthdate" formControlName="birthdate" styleClass="w-full"
-                                    [readonlyInput]="true" [maxDate]="today"
-                                    dateFormat="dd/mm/yy"></p-calendar>
+                                    [maxDate]="today" dateFormat="dd/mm/yy"></p-calendar>
                                 <label htmlFor="birthdate" for="birthdate">Fecha de nacimiento</label>
                             </span>
                         </div>
@@ -126,7 +133,7 @@
         </div>
         <div class="text-center mb-3">
             <button type="button" pButton pRipple class="p-button-raised p-button-text p-button-secondary font-semibold uppercase justify-content-center" [routerLink]="['/hotels']">Cancelar</button>
-            <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center ml-2" [disabled]="!enableFinishButton()">Realizar reserva</button>
+            <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center ml-2" [disabled]="!enableFinishButton()" (click)="bookingRoom()">Realizar reserva</button>
         </div>
     </form>    
 </div>

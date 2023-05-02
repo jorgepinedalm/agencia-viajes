@@ -35,6 +35,7 @@ export class HotelService {
    }
 
   getHotels():Observable<Hotel[]>{
+    this.$hotels.next(this.hotels);
     return this.$hotels.asObservable();
   }
 
@@ -84,10 +85,12 @@ export class HotelService {
     return of(true);
   }
 
-  search(filter:FilterDataHotel):void{
-    let hotels = this.hotels;
-    hotels = hotels.filter(
-      hotel => hotel.city.code == filter.city && hotel.rooms?.some(room => room.capacity <= filter.numberPeople))
+  search(filter?:FilterDataHotel):void{
+    let hotels = [...this.hotels];
+    if(filter){
+      hotels = hotels.filter(
+        hotel => hotel.city.code == filter.city && hotel.rooms?.some(room => room.capacity <= filter.numberPeople))
+    }    
     this.$hotels.next(hotels);
   }
 }

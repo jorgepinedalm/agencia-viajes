@@ -24,6 +24,7 @@
                 <label htmlFor="city" for="city">Ciudad destino</label>
             </span>
         </div>
-        <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center w-full button-submit" (click)="search()" [disabled]="!form.valid">Buscar</button>
+        <button type="button" pButton pRipple class="p-button-raised p-button-success font-semibold uppercase justify-content-center w-full button-submit mb-1" (click)="search()" [disabled]="!form.valid">Buscar</button>
+        <button type="button" pButton pRipple class="p-button-sm p-button-link font-semibold justify-content-center w-full" (click)="clearFilter()">Limpiar filtros</button>
     </form>
 </p-card>
